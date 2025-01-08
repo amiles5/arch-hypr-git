@@ -1,183 +1,204 @@
-/* =============================================================================
- *
- * Waybar configuration
- *
- * Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
- *
- * =========================================================================== */
- 
-/* -----------------------------------------------------------------------------
- * Keyframes
- * -------------------------------------------------------------------------- */
-
-
-/*
-Polar Night
-nord0  #2e3440
-nord1  #3b4252
-nord2  #434c5e
-nord3  #4c566a
-Snow Storm
-nord4  #d8dee9
-nord5  #e5e9f0
-nord6  #eceff4
-Frost
-nord7  #8fbcbb
-nord8  #88c0d0
-nord9  #81a1c1
-nord10 #5e81ac
-Aurora
-nord11 #bf616a
-nord12 #d08770
-nord13 #ebcb8b
-nord14 #a3be8c
-nord15 #b48ead
-*/
-
-/* -----------------------------------------------------------------------------
- * Base styles
- * -------------------------------------------------------------------------- */
- 
-/* Reset all styles */
-
 * {
-    color: #eceff4;
-    border: 0;
-    border-radius: 0;
-    padding: 0 0;
-    font-family:Symbols Nerd Font Mono;
-    font-size: 15px;
-    margin-right: 5px;
-    margin-left: 5px;
-    padding-bottom:2px;
-   }
+  /*font-family: "JetBrainsMono NFM:style=Bold", "Noto Sans", "Roboto Condensed", sans-serif;*/
+  font-family: "SauceCodePro nerd", "Noto Sans", "Roboto Condensed", sans-serif;
+  font-size: 15px;
+  /* color: #3A3B3C; */
+}
 
 window#waybar {
-    background:rgba (0, 0, 0, 0.5);
-    border-radius: 20px 20px 20px 20px; 
+  /* Transparent waybar. Make sure to comment out background-color: and border: */
+  background: rgba(0, 0, 0, 0.5);
+  /* background-color: #1e1e2e; */
+  /* border: 2px solid #313244; */
+  transition-property: background-color;
+  transition-duration: .5s;
 }
 
-#workspaces button {
-    padding: 2px 0px;
-    border-bottom: 2px;
-    color: #eceff4;
-    border-color: #d8dee9;
-    border-style: solid;
-    margin-top:2px;
+window#waybar.hidden {
+  opacity: 0.5;
 }
 
-#workspaces button.active {
-    border-color: #81a1c1;
+#backlight,
+#battery,
+#clock,
+#cpu,
+#disk,
+#memory,
+#tray,
+#temperature,
+#bluetooth,
+#idle_inhibitor,
+#pulseaudio,
+#custom-change-waybar,
+#custom-menu,
+#custom-power,
+#custom-weather,
+#custom-updater,
+#custom-updater-improved,
+#custom-keybindings,
+#custom-cycle_wall,
+#network {
+  border-radius: 4px;
+  margin: 4px 0px;
+  padding: 0px 4px;
+  color: #3A3B3C;
+  /*border: 2px solid #3a3b3c; */
 }
 
-#clock, #battery, #cpu, #memory,#idle_inhibitor, #temperature,#custom-changewaybar,#custom-keyboard-layout, #backlight, #network, #pulseaudio, #tray, #window,#custom-launcher,#custom-power,#custom-pacman ,#custom-network_traffic,#custom-weather{
-    padding: 0 3px;
-    border-bottom: 2px;
-    border-style: solid;
-}
- 
-/* -----------------------------------------------------------------------------
- * Module styles
- * -------------------------------------------------------------------------- */
-
- 
-#clock {
- color:#a3be8c;
+#workspaces {
+  border-radius: 4px;
+  margin: 4px 0px;
+  padding: 0px 4px;
+  color: #3A3B3C;
 }
 
 #backlight {
-    color: #ebcb8b;
+  background-color: #cba6f7;
 }
 
 #battery {
-    color: #d8dee9;
-}
-
-#battery.charging {
-    color: #81a1c1;
+  background-color: #f9e2af;
 }
 
 @keyframes blink {
-    to {
-        color: #4c566a;
-        background-color: #eceff4;
-    }
+  to {
+    color: #000000;
+  }
 }
 
 #battery.critical:not(.charging) {
-    background: #bf616a;
-    color: #eceff4;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: #f38ba8;
+  color: #f38ba8;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#clock {
+  background-color: #a6e3a1;
 }
 
 #cpu {
-    color:#a3be8c ;
+  background-color: #89dceb;
 }
 
 #memory {
-    color: #d3869b;
+  background-color: #eba0ac;
 }
 
-#network.disabled {
-    color:#bf616a;
+#disk {
+  background-color: #b4befe;
 }
 
-#network{
-    color:#a3be8c;
-}
-
-#network.disconnected {
-    color: #bf616a;
-}
-
-#pulseaudio {
-    color: #b48ead;
-}
-
-#pulseaudio.muted {
-    color: #3b4252;
-}
-
-#temperature {
-    color: #8fbcbb;
-}
-
-#temperature.critical {
-    color: #bf616a;
+#tray {
+  background-color: #b4befe;
 }
 
 #idle_inhibitor {
-   color: #ebcb8b;
+  background-color: #f4befe;
+}
+
+#temperature {
+  background-color: #b4befe;
+}
+
+#bluetooth {
+  background-color: #b4beae;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#workspaces button {
+  background-color: #d9e0ee;
+  color: #3A3B3C;
+  /* border: 2px solid #3a3b3c; */
+  margin-right: 2px;
+  border-radius: 4px;
+}
+
+#workspaces button.active {
+  background-color: rgb(249, 226, 175);
+  color: #3A3B3C;
+}
+
+#custom-menu {
+  background-color: #f5c2e7;
+}
+
+#custom-power {
+  background-color: #f38ba8;
+  margin-right: 4px;
+  font-size: 24px;
+}
+
+#custom-updater {
+  background-color: #e6ed7b;
+}
+
+#custom-updater-improved {
+  background-color: #e6ed7b;
+}
+
+#custom-uptime {
+  background-color: #e6ed7b;
 }
 
 #custom-changewaybar {
-  margin: 4px 10px;
+  border-radius: 4px;
+  margin: 4px 0px;
   padding: 0px 4px;
-  border-style: hidden;
+  color: #3A3B3C;
+  background-color: #ebcb8b;
 }
 
-
-#tray {
+#custom-weather {
+  background-color: #cba6f7;
 }
 
-#custom-launcher,#custom-power{
-    border-style: hidden;
-    margin-top:2px;
+#custom-cycle_wall {
+  background-color: #89dceb;
 }
 
-#window{
-    border-style: hidden;
-    margin-top:1px;  
-}    
-#custom-keyboard-layout{
-   color:#d08770;
-}   
-#custom-network_traffic{
-   color:#d08770;
+#custom-vpn_check {
+  background-color: #a6e3a1;
 }
 
+#custom-cputemp {
+  background-color: #86b4fa;
+}
 
+#custom-keybindings {
+  background-color: #86b4fa;
+  font-size: 18px;
+}
+
+#pulseaudio {
+  background-color: #fab387;
+}
+
+#pulseaudio.bluetooth {
+  background-color: #f5c2e7;
+}
+
+#pulseaudio.muted {
+  background-color: #313244;
+  color: #cdd6f4;
+}
+
+#network {
+  background-color: #89b4fa;
+}
+
+#network.disconnected,
+#network.disabled {
+  background-color: #313244;
+  color: #cdd6f4;
+}
